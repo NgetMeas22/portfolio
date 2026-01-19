@@ -1,11 +1,17 @@
 import React, { useRef, useEffect, useState } from "react";
 
+// Assuming these are your local assets
+import Sli from "./src/assets/images/Sli.gif";
+import img from "./src/assets/images/1.jpg";
+
 export const About = () => {
-  const text1 = "I'm Frontend Developer";
-  const text2 = "Hello, my name is Nget Meas. I’m 18 years old and currently in my second year at the Royal University of Phnom Penh, majoring in Computer Science. I have three siblings, and I am the third child. I am talkative and friendly, and I enjoy interacting with people and learning new things.";
-  const text3 = "I am also a Frontend Developer with skills in HTML, CSS, JavaScript, React, and Tailwind CSS, focused on building clean and responsive websites.";
-  const text4 = "Laguages I speak are Khmer (native) and English (fair).";
-  // Refs for each paragraph
+  const text1 = "I'm a Frontend Developer";
+  const text2 = "Hello, my name is Nget Meas. I’m 18 years old and currently in my second year at the Royal University of Phnom Penh, majoring in Computer Science.";
+  const text3 = "I focus on building clean and responsive websites using HTML, CSS, JavaScript, React, and Tailwind CSS.";
+  
+  const contents = [text1, text2, text3];
+  
+  // Create refs for the 3 main paragraphs
   const paragraphs = [useRef(null), useRef(null), useRef(null)];
   const [visible, setVisible] = useState([false, false, false]);
 
@@ -24,7 +30,7 @@ export const About = () => {
           });
         });
       },
-      { threshold: 1 }
+      { threshold: 0.5 } // Trigger when 50% visible for smoother UX
     );
 
     paragraphs.forEach((ref) => {
@@ -35,63 +41,72 @@ export const About = () => {
   }, []);
 
   return (
-    <div>
-      <section className="w-full min-h-screen bg-cover bg-center bg-no-repeat py-16 px-6 lg:px-20"
-      
-       style={{
-    backgroundImage:
-      "url('./src/assets/images/Sli.gif')",
-  }}
+    <div className="overflow-x-hidden">
+      <section 
+        className="w-full min-h-screen bg-cover bg-center bg-no-repeat py-16 px-6 lg:px-20"
+        style={{ backgroundImage: `url(${Sli})` }} // Better practice to use imported variable
       >
-        <div className="max-w-7xl mx-auto grid  bg-amber50 grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* Left Image */}
-          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-75 lg:h-75 lg:ml-10 rounded-full group">
-            <div className="absolute -inset-1 rounded-full bg-linear-to-r from-blue-400 via-purple-500 to-pink-500 opacity-70 blur-lg transition-all duration-500 group-hover:opacity-100 animate-spin"></div>
+          {/* Left Side: Profile Image */}
+          <div className="flex justify-center lg:justify-start">
+            <div className="relative w-56 h-56 md:w-64 md:h-64 lg:w-96 lg:h-96 group">
+              {/* Spinning Glow Effect */}
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-70 blur-lg transition-all duration-500 group-hover:opacity-100 animate-pulse"></div>
 
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 lg:border-5 border-blue-500">
-              <img
-                src="./src/assets/images/1.jpg"
-                alt="Meas"
-                className="w-full h-full object-cover rounded-full"
-              />
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-blue-500 shadow-2xl">
+                <img
+                  src={img} // Use the imported 'img' variable
+                  alt="Nget Meas"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
 
-          {/* Right Content */}
-          <div>
-            <h2 className="text-4xl lg:text-7xl font-bold flex text-white mb-4">
-              About <span className="text-blue-500 mb-5 pl-4 lg:text-7xl text-4xl">Me</span>
+          {/* Right Side: Content */}
+          <div className="text-white">
+            <h2 className="text-5xl lg:text-7xl font-bold mb-6">
+              About <span className="text-blue-500">Me</span>
             </h2>
             
-            {[text1, text2, text3, text4].map((text, idx) => (
+            {/* Animated Paragraphs */}
+            {contents.map((text, idx) => (
               <p
                 key={idx}
                 ref={paragraphs[idx]}
-                className={`text-white text-xl leading-relaxed mb-10 transition-all duration-1500 ${
-                  visible[idx] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-15"
+                className={`text-lg lg:text-xl leading-relaxed mb-6 transition-all duration-1000 ease-out ${
+                  visible[idx] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
               >
                 {text}
               </p>
             ))}
-            <hr className=" text-white"/>
-            <h2 className="text-3xl lg:text-3xl font-bold text-white mt-2 mb-5">
-        Langu<span className="text-blue-500">ages :</span>
-      </h2>
-            <h2 className="text-xl lg:text-xl font-medium text-white">
-        Khmer: <span className="text-blue-500">Native</span>
-      </h2>
-            <h2 className="text-xl lg:text-xl font-medium text-white">
-        English: <span className="text-blue-500">Fair</span>
-      </h2>
-      
+
+            <hr className="border-gray-500 my-8" />
+
+            {/* Language Section */}
+            <div className="bg-black/30 p-6 rounded-2xl backdrop-blur-sm border border-white/10">
+              <h3 className="text-3xl font-bold mb-4">
+                Langu<span className="text-blue-500">ages</span>
+              </h3>
+              
+              <div className="space-y-3">
+                <div className="flex items-center justify-between max-w-xs">
+                  <span className="text-xl font-medium">Khmer:</span>
+                  <span className="text-blue-400 font-bold bg-blue-500/10 px-3 py-1 rounded-lg">Native</span>
+                </div>
+                
+                <div className="flex items-center justify-between max-w-xs">
+                  <span className="text-xl font-medium">English:</span>
+                  <span className="text-blue-400 font-bold bg-blue-500/10 px-3 py-1 rounded-lg">Fair</span>
+                </div>
+              </div>
+            </div>
+
           </div>
-          
         </div>
       </section>
-      
     </div>
-    
   );
 };

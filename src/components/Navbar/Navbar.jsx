@@ -1,8 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  // Change navbar background on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const nav = [
     { name: "Home", href: "/" },
@@ -13,97 +24,81 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full bg-black border-b sticky z-50 top-0 border-gray-700 shadow-md px-6 lg:px-16 py-7 ">
-      {/* Top bar */}
-      <div className="flex items-center justify-between">
+    <nav className={`w-full fixed z-50 top-0 transition-all duration-300 px-6 lg:px-16 py-4 ${
+      scrolled 
+      ? "bg-black/80 backdrop-blur-lg border-b border-gray-800 py-3" 
+      : "bg-transparent py-5"
+    }`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        
         {/* Logo */}
-        <h1 className="text-2xl font-bold flex text-white">
-          Portfolio <span className="text-blue-400">.</span>
-        </h1>
+        <Link to="/" className="text-2xl font-bold text-white tracking-tighter">
+          NgetMeas<span className="text-blue-500">.</span>
+        </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex bg-gray-700/50 px-50 py-2 border border-gray-600 rounded-full">
-          <ul className="flex text-lg font-medium gap-15">
+        <div className="hidden lg:flex items-center bg-gray-900/40 px-8 py-2 border border-white/10 rounded-full backdrop-blur-md">
+          <ul className="flex text-sm font-semibold gap-10">
             {nav.map((item, index) => (
               <li key={index}>
-                <a
-                  href={item.href}
-                  className="relative text-gray-200 transition-colors duration-300 hover:text-blue-800
-                  after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-0.5 after:w-0
-                  after:bg-blue-500 after:transition-all after:duration-200 after:-translate-x-1/2
-                  hover:after:w-full"
+                <Link
+                  to={item.href}
+                  className={`relative transition-colors duration-300 hover:text-blue-400 ${
+                    location.pathname === item.href ? "text-blue-400" : "text-gray-300"
+                  } after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 
+                    after:bg-blue-500 after:transition-all hover:after:w-full`}
                 >
                   {item.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
-       {/* Desktop Button */}
-       
-       <Link
-  to="/contact"
-  className="hidden lg:block bg-blue-500 font-medium hover:bg-blue-700 text-white px-6 py-2 rounded-full transition duration-300 text-center"
->
-  Contact Me
-</Link>
 
-{/* Mobile Button */}
-<button
-  className="lg:hidden text-3xl text-white"
-  onClick={() => setMenuOpen(true)}
->
-  ☰
-</button>
-</div>
+        {/* Desktop CTA */}
+        <Link
+          to="/contact"
+          className="hidden lg:block bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-full font-bold transition-all hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95"
+        >
+          Contact Me
+        </Link>
 
-{/* Mobile Menu */}
-{menuOpen && (
-  <>
-    {/* Overlay */}
-    <div
-      className="fixed inset-0 bg-black/50 z-40"
-      onClick={() => setMenuOpen(false)}
-    />
+        {/* Mobile Hamburger */}
+        <button
+          className="lg:hidden flex flex-col gap-1.5 z-60"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className={`h-1 w-8 bg-white rounded-full transition-all ${menuOpen ? "rotate-45 translate-y-2.5" : ""}`}></span>
+          <span className={`h-1 w-8 bg-white rounded-full transition-all ${menuOpen ? "opacity-0" : ""}`}></span>
+          <span className={`h-1 w-8 bg-white rounded-full transition-all ${menuOpen ? "-rotate-45 -translate-y-2.5" : ""}`}></span>
+        </button>
+      </div>
 
-    {/* Sidebar */}
-    <div className="lg:hidden fixed top-0 right-0 h-full w-[70%] bg-gray-800 p-6 shadow-lg z-50">
-      {/* Close Button */}
-      <button
-        className="text-white text-3xl absolute top-4 right-4"
-        onClick={() => setMenuOpen(false)}
-      >
-        ✕
-      </button>
-         {/* Mobile CTA */}
-      <Link to="/contact">
-  <button className="mt-10 px-5 bg-blue-500 hover:bg-blue-700 text-white py-2 rounded-full transition">
-    Contact Me
-  </button>
-</Link>
-      <ul className="flex flex-col gap-6 text-lg font-medium mt-5">
-        {nav.map((item, index) => (
-          <li key={index}>
-            <a
-              href={item.href}
-             className="relative text-gray-300 transition-colors duration-300 hover:text-white
-                  after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-0.5 after:w-0
-                  after:bg-blue-500 after:transition-all after:duration-200 after:-translate-x-1/2
-                  hover:after:w-full"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-     
-    </div>
-  </>
-)}
-
-
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-black/95 flex flex-col items-center justify-center gap-8 transition-all duration-500 lg:hidden ${
+        menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+      }`}>
+        <ul className="flex flex-col items-center gap-8 text-2xl font-bold">
+          {nav.map((item, index) => (
+            <li key={index}>
+              <Link
+                to={item.href}
+                className="text-white hover:text-blue-500 transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link
+          to="/contact"
+          onClick={() => setMenuOpen(false)}
+          className="bg-blue-600 text-white px-10 py-3 rounded-full font-bold text-xl"
+        >
+          Contact Me
+        </Link>
+      </div>
     </nav>
   );
 };
