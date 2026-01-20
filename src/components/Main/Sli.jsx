@@ -46,7 +46,7 @@ const Sli = () => {
    <div 
       className="min-h-screen flex flex-col-reverse bg-cover bg-center bg-no-repeat lg:flex-row pt-20 lg:pt-40 justify-center px-6 lg:px-20"
       style={{
-        // 2. Use backticks and the new variable name SliBg
+        
         backgroundImage: `url(${SliBg})`,
       }}
     >
@@ -79,7 +79,7 @@ const Sli = () => {
   </p>
 
   {/* 3 Stats Cards */}
-  <div className="grid grid-cols-1 pt-20 sm:grid-cols-3 gap-4 sm:gap-6">
+  <div className="grid grid-cols-3 pt-20 sm:grid-cols-3 gap-4 sm:gap-6">
     <div className="bg-gray-900 border border-blue-500 rounded-xl hover:scale-105 transition-transform duration-300 text-center">
      <img className=" object-cover object-center rounded-xl" src={Sli1} alt="" />
     </div>

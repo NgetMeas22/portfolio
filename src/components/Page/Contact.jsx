@@ -53,28 +53,36 @@ const Contact = () => {
               <a
                 aria-label="Facebook"
                 href="https://web.facebook.com/nget.meas.2025"
-                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+                className="p-2 text-sky-600 rounded-full border-2 border-sky-700
+           transition-transform duration-600 ease-out
+           hover:bg-blue-500/55 hover:-translate-y-2"
               >
                 <FaFacebookF/>
               </a>
               <a
                 aria-label="Instagram"
                 href="#"
-                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+                className="p-2 text-sky-600 rounded-full border-2 border-sky-700
+           transition-transform duration-500 ease-out
+           hover:bg-blue-500/55 hover:-translate-y-2"
               >
                 <FaInstagram/>
               </a>
               <a
                 aria-label="TikTok"
                 href="https://www.tiktok.com/@ngetmeas2"
-                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+                className="p-2 text-sky-600 rounded-full border-2 border-sky-700
+           transition-transform duration-500 ease-out
+           hover:bg-blue-500/55 hover:-translate-y-2"
               >
                 <FaTiktok/>
               </a>
               <a
                 aria-label="Github"
                 href="https://github.com/NgetMeas22"
-                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+                className="p-2 text-sky-600 rounded-full border-2 border-sky-700
+           transition-transform duration-500 ease-out
+           hover:bg-blue-500/55 hover:-translate-y-2"
               >
                 <FaGithub/>
               </a>
@@ -123,7 +131,7 @@ const Contact = () => {
           type="submit"
           className="w-full bg-sky-600 hover:bg-sky-800 text-white hover:text-gray-400 py-3 rounded-xl font-medium transition"
         >
-          Save CV
+          Send Message
         </button>
 
       </form>

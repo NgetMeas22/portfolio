@@ -14,25 +14,24 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-black border-b sticky z-50 top-0 border-gray-700 shadow-md px-6 lg:px-16 py-7 ">
-      {/* Top bar */}
+     
       <div className="flex items-center justify-between">
-        {/* Logo */}
+       
         <h1 className="text-2xl font-bold flex text-white">
           Portfolio <span className="text-blue-400">.</span>
         </h1>
 
-        {/* Desktop Menu */}
+        
         <div className="hidden lg:flex bg-gray-700/50 px-50 py-2 border border-gray-600 rounded-full">
          <ul className="flex text-lg font-medium gap-15">
   {nav.map((item, index) => (
     <li key={index}>
-      {/* 1. Change <a> to <Link> */}
-      {/* 2. Change href to to */}
+    
       <Link
         to={item.href} 
         className="relative text-gray-200 transition-colors duration-300 hover:text-blue-400
-                  after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-0.5 after:w-0
-                  after:bg-blue-500 after:transition-all after:duration-200 after:-translate-x-1/2
+                  after:content-[''] after:absolute after:left-2 after:-bottom-1 after:h-0.5 after:w-0
+                  after:bg-blue-500 after:transition-all after:duration-350 after:-translate-x-2
                   hover:after:w-full"
       >
         {item.name}
@@ -79,24 +78,26 @@ const Navbar = () => {
       </button>
          {/* Mobile CTA */}
       <Link to="/contact">
-  <button className="mt-10 px-5 bg-blue-500 hover:bg-blue-700 text-white py-2 rounded-full transition">
+  <button className="relative text-white transition-colors duration-300 px-2 py-2 rounded-xl hover:bg-gray-600 bg-gray-700/50 hover:text-blue-400
+                 ">
     Contact Me
   </button>
 </Link>
       <ul className="flex flex-col gap-6 text-lg font-medium mt-5">
         {nav.map((item, index) => (
           <li key={index}>
-            <a
-              href={item.href}
-             className="relative text-gray-300 transition-colors duration-300 hover:text-white
-                  after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-0.5 after:w-0
-                  after:bg-blue-500 after:transition-all after:duration-200 after:-translate-x-1/2
+      {/* 1. Change <a> to <Link> */}
+      {/* 2. Change href to to */}
+      <Link
+        to={item.href} 
+       className="relative text-gray-300 transition-colors duration-300 hover:text-blue-400
+                  after:content-[''] after:absolute after:left-2 after:-bottom-1 after:h-0.5 after:w-0
+                  after:bg-blue-500 after:transition-all after:duration-350 after:-translate-x-2
                   hover:after:w-full"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.name}
-            </a>
-          </li>
+      >
+        {item.name}
+      </Link>
+    </li>
         ))}
       </ul>
 
@@ -110,4 +111,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 

@@ -15,8 +15,7 @@ const Home = () => {
       <Skills/>
       <Project/>
       <Contact/>
-      
-      
+
       
     </div>
   )
