@@ -6,10 +6,10 @@ const Navbar = () => {
 
   const nav = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Skills", href: "/skills" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: "About", href: "/" },
+    { name: "Skills", href: "/" },
+    { name: "Projects", href: "/" },
+    { name: "Contact", href: "/" },
   ];
 
   return (
