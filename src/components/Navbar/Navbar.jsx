@@ -6,10 +6,10 @@ const Navbar = () => {
 
   const nav = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/" },
-    { name: "Skills", href: "/" },
-    { name: "Projects", href: "/" },
-    { name: "Contact", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Skills", href: "/skills" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -23,21 +23,23 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex bg-gray-700/50 px-50 py-2 border border-gray-600 rounded-full">
-          <ul className="flex text-lg font-medium gap-15">
-            {nav.map((item, index) => (
-              <li key={index}>
-                <a
-                  href={item.href}
-                  className="relative text-gray-200 transition-colors duration-300 hover:text-blue-800
+         <ul className="flex text-lg font-medium gap-15">
+  {nav.map((item, index) => (
+    <li key={index}>
+      {/* 1. Change <a> to <Link> */}
+      {/* 2. Change href to to */}
+      <Link
+        to={item.href} 
+        className="relative text-gray-200 transition-colors duration-300 hover:text-blue-400
                   after:content-[''] after:absolute after:left-1/2 after:-bottom-1 after:h-0.5 after:w-0
                   after:bg-blue-500 after:transition-all after:duration-200 after:-translate-x-1/2
                   hover:after:w-full"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+      >
+        {item.name}
+      </Link>
+    </li>
+  ))}
+</ul>
         </div>
        {/* Desktop Button */}
        
