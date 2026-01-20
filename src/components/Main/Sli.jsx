@@ -1,104 +1,117 @@
 import React, { useEffect, useState } from "react";
 
-// Importing images is safer than using string paths in Vite/React
-import SliBg from "./src/assets/images/Sli.gif";
-import AboutGif from "./src/assets/images/About.gif";
-import Sli1 from "./src/assets/images/Sli1.gif";
-import Sli2 from "./src/assets/images/Sli2.gif";
-import Sli3 from "./src/assets/images/Sli3.gif";
+
+import SliBg from '../../assets/images/Sli.gif'; 
+import Sli1 from '../../assets/images/Sli1.gif';
+import Sli2 from '../../assets/images/Sli2.gif';
+import Sli3 from '../../assets/images/Sli3.gif';
+import About from '../../assets/images/About.gif';
+
 
 const Sli = () => {
   const texts = ["I'm a Frontend Developer", "Welcome to My Portfolio"];
+
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const fullText = texts[textIndex];
-    
     const timeout = setTimeout(() => {
+      const fullText = texts[textIndex];
+
       if (!isDeleting) {
-        // Typing
         setCurrentText(fullText.slice(0, charIndex + 1));
-        setCharIndex((prev) => prev + 1);
+        setCharIndex(charIndex + 1);
 
         if (charIndex + 1 === fullText.length) {
-          setTimeout(() => setIsDeleting(true), 1500); // Pause at end
+          setTimeout(() => setIsDeleting(true), 1000);
         }
       } else {
-        // Deleting
         setCurrentText(fullText.slice(0, charIndex - 1));
-        setCharIndex((prev) => prev - 1);
+        setCharIndex(charIndex - 1);
 
         if (charIndex === 0) {
           setIsDeleting(false);
-          setTextIndex((prev) => (prev + 1) % texts.length);
+          setTextIndex((textIndex + 1) % texts.length);
         }
       }
-    }, isDeleting ? 50 : 100);
+    }, isDeleting ? 60 : 120);
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, textIndex]);
+  }, [charIndex, isDeleting, textIndex, texts]);
+
 
   return (
-    <div 
-      className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center bg-cover bg-center bg-no-repeat px-6 lg:px-20 pt-20 lg:pt-0"
-      style={{ backgroundImage: `url(${SliBg})` }}
+   <div 
+      className="min-h-screen flex flex-col-reverse bg-cover bg-center bg-no-repeat lg:flex-row pt-20 lg:pt-40 justify-center px-6 lg:px-20"
+      style={{
+        // 2. Use backticks and the new variable name SliBg
+        backgroundImage: `url(${SliBg})`,
+      }}
     >
       
-      {/* LEFT SIDE: Text Section */}
-      <div className="lg:w-1/2 w-full flex flex-col text-center lg:text-left mt-10 lg:mt-0">
-        <h4 className="text-lg sm:text-xl text-blue-500 font-semibold mb-2">
-          👋 Hello there!
-        </h4>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4">
-          I'm <span className="text-blue-400">Meas</span>
-        </h1>
+      
+     {/* Text Section */}
+  <div className="lg:w-1/2 w-full flex flex-col px-4 sm:px-6 lg:pr-40 text-center lg:text-left">
+  {/* Greeting */}
+  <h4 className="text-lg sm:text-xl text-blue-500 font-semibold pt-10 lg:pt-0 mb-2">
+    👋 Hello there!
+  </h4>
 
-        {/* Auto-typing text height-fixed to prevent layout shift */}
-        <div className="h-12 sm:h-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
-            <span className="text-blue-500 border-r-4 border-blue-500 pr-2 animate-pulse">
-              {currentText}
-            </span>
-          </h2>
-        </div>
+  {/* Name */}
+  <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4">
+    I'm <span className="text-blue-400 px-1">Meas</span>
+  </h1>
 
-        <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0">
-          Creative Frontend Developer with 1 year of experience developing modern web UI and improving user experience.
-        </p>
+  {/* Auto-typing text */}
+  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6">
+    {" "}
+    <span className="text-blue-500 border-r-2 border-blue-500 pr-1 animate-pulse">
+      {currentText}
+    </span>
+  </h2>
 
-        {/* Stats/Image Cards */}
-        <div className="grid grid-cols-3 gap-4 mt-8">
-          {[Sli1, Sli2, Sli3].map((img, i) => (
-            <div key={i} className="group overflow-hidden rounded-xl border border-blue-500/30 hover:border-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/10">
-              <img 
-                className="w-full h-24 sm:h-32 object-cover transition-transform duration-500 group-hover:scale-110" 
-                src={img} 
-                alt={`stat-${i}`} 
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+  {/* Description */}
+  <p className="text-base sm:text-lg text-gray-300 mb-8">
+    Creative Frontend Developer with 1 year of experience developing modern web UI and improving user experience.
+  </p>
 
-      {/* RIGHT SIDE: Profile Image */}
-      <div className="lg:w-1/2 flex justify-center lg:justify-end">
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-112.5 lg:h-112.5 group">
-          {/* Multi-color Spinning Gradient */}
-          <div className="absolute -inset-2 rounded-full bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 opacity-60 blur-xl group-hover:opacity-100 animate-spin-slow"></div>
+  {/* 3 Stats Cards */}
+  <div className="grid grid-cols-1 pt-20 sm:grid-cols-3 gap-4 sm:gap-6">
+    <div className="bg-gray-900 border border-blue-500 rounded-xl hover:scale-105 transition-transform duration-300 text-center">
+     <img className=" object-cover object-center rounded-xl" src={Sli1} alt="" />
+    </div>
+    <div className="bg-gray-900 border border-blue-500 rounded-xl hover:scale-105 transition-transform duration-300 text-center">
+     <img className=" object-cover object-center rounded-xl" src={Sli2} alt="" />
+    </div>
+    <div className="bg-gray-900 border border-blue-500 rounded-xl hover:scale-105 transition-transform duration-300 text-center">
+     <img className=" object-cover object-center rounded-xl" src={Sli3} alt="" />
+    </div>
 
-          <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-blue-500/50 p-2 bg-gray-900">
-            <img
-              src={AboutGif}
-              alt="Meas"
-              className="w-full h-full object-cover rounded-full"
-            />
-          </div>
-        </div>
-      </div>
+   
+  </div>
+</div>
+
+
+      <div className="relative w-50 h-50 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-100 lg:h-100 lg:ml-10 rounded-full group">
+  {/* Animated gradient border */}
+  <div className="
+    absolute -inset-2 rounded-full bg-linear-to-r bg-[linear-gradient(90deg,#6366f1,#8b5cf6,#d946ef,#ec4899,#f43f5e,#f97316,#facc15)]
+    opacity-70 blur-lg transition-all duration-500 group-hover:opacity-100 animate-spin
+  "></div>
+
+  {/* Centered Image */}
+  <div className="relative w-full h-full  rounded-full overflow-hidden border-2 lg:border-5 border-blue-500">
+    <img
+      src={About} // replace with your image path
+      alt="Meas"
+      className="w-full h-full object-cover rounded-full"
+    />
+  </div>
+</div>
+
 
     </div>
   );

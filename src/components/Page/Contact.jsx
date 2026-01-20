@@ -1,120 +1,139 @@
 import React from 'react'
-import { FaFacebookF, FaGithub, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { FaFacebookF, FaGithub, FaInstagram, FaPhoneAlt, FaTiktok, FaTwitter } from 'react-icons/fa'
 import { FaLocationDot } from 'react-icons/fa6'
 import { MdEmail, MdLocalPhone } from 'react-icons/md'
 
-// Best practice: Import your background
-import SliBg from "./src/assets/images/Sli.gif";
+import Sli from '../../assets/images/Sli.gif'
 
 const Contact = () => {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center px-4 py-20 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${SliBg})` }}
+    <div className="min-h-screen w-full flex items-center justify-center px-4 bg-cover bg-center bg-no-repeat "
+      style={{
+        backgroundImage: `url(${Sli})`, // ✅ correct
+      }}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 shadow-2xl max-w-5xl w-full bg-gray-900/80 rounded-3xl overflow-hidden backdrop-blur-md border border-white/10">
 
-        {/* Left Section: Info */}
-        <div className="p-8 lg:p-12 flex flex-col justify-between bg-blue-600/10">
-          <div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-              Contact <span className="text-blue-400">Me</span>
-            </h1>
-            <p className="text-sky-200/80 text-lg mb-8">
-              I’m currently looking for new opportunities. Whether you have a question or just want to say hi, I’ll try my best to get back to you!
-            </p>
+  <div className="grid grid-cols-1  lg:grid-cols-2 shadow-lg max-w-5xl w-full bg-gray-900/55 rounded-2xl overflow-hidden">
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 text-white group">
-                <div className="p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500 transition-colors">
-                  <FaLocationDot className="text-blue-400 group-hover:text-white" />
-                </div>
-                <span className="text-lg">St 06, Dang Kor, Phnom Penh</span>
+    {/* Left Section */}
+    <div
+      className="h-64 lg:h-auto bg-cover bg-center bg-no-repeat"
+    
+    >
+      <h1 className="text-center pt-5 lg:pt-25 text-3xl lg:text-5xl font-bold text-white">
+        Contact<span className="text-blue-400 pl-2 px-1">Me</span>
+      </h1>
+      <p className="p-6 text-sm lg:px-20 text-center text-sky-200">
+        Feel free to get in touch with me if you have any questions.I will be happy to respond.
+      </p>
+     <div className=" px-10 lg:pt-10 text-sm space-y-2">
+              <div className="flex text-blue-500 items-center gap-2">
+                <FaLocationDot/>
+                <span> St 06, Dang kor, Phnom Penh</span>
               </div>
-
-              <div className="flex items-center gap-4 text-white group">
-                <div className="p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500 transition-colors">
-                  <MdLocalPhone className="text-blue-400 group-hover:text-white" />
-                </div>
-                <a href="tel:+855966698074" className="text-lg hover:text-blue-400 transition-colors">
+              <div className=" text-blue-500 flex items-center gap-2">
+                <MdLocalPhone/>
+                <a href="tel:+855966698074" className="hover:underline">
                   +855 966 698 074
                 </a>
               </div>
-
-              <div className="flex items-center gap-4 text-white group">
-                <div className="p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500 transition-colors">
-                  <MdEmail className="text-blue-400 group-hover:text-white" />
-                </div>
-                <a href="mailto:measm2519@gmail.com" className="text-lg hover:text-blue-400 transition-colors break-all">
+              <div className="flex text-blue-500 items-center gap-2">
+                <MdEmail/>
+                <a
+                  href="mailto:measm2519@gmail.com"
+                  className="hover:underline"
+                >
                   measm2519@gmail.com
                 </a>
               </div>
+
             </div>
-          </div>
-
-          {/* Social Icons */}
-          <div className="mt-12">
-            <h3 className="text-white font-semibold mb-4 uppercase tracking-widest text-sm">Follow Me</h3>
-            <div className="flex gap-4">
-              {[
-                { icon: <FaFacebookF />, link: "https://web.facebook.com/nget.meas.2025" },
-                { icon: <FaInstagram />, link: "#" },
-                { icon: <FaTiktok />, link: "https://www.tiktok.com/@ngetmeas2" },
-                { icon: <FaGithub />, link: "https://github.com/NgetMeas22" }
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  className="w-11 h-11 flex items-center justify-center rounded-full bg-gray-800 text-blue-400 border border-blue-500/30 hover:bg-blue-500 hover:text-white hover:-translate-y-1 transition-all duration-300"
-                >
-                  {social.icon}
-                </a>
-              ))}
+      
+      <div className="flex items-center text-sm lg:pt-20  gap-3 px-10 py-5">
+              <a
+                aria-label="Facebook"
+                href="https://web.facebook.com/nget.meas.2025"
+                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+              >
+                <FaFacebookF/>
+              </a>
+              <a
+                aria-label="Instagram"
+                href="#"
+                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+              >
+                <FaInstagram/>
+              </a>
+              <a
+                aria-label="TikTok"
+                href="https://www.tiktok.com/@ngetmeas2"
+                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+              >
+                <FaTiktok/>
+              </a>
+              <a
+                aria-label="Github"
+                href="https://github.com/NgetMeas22"
+                className="p-2 text-sky-600 rounded-full  hover:bg-blue-500/55 border-2 border-sky-700 transition"
+              >
+                <FaGithub/>
+              </a>
+           
             </div>
-          </div>
-        </div>
-
-        {/* Right Section: Form */}
-        <div className="p-8 lg:p-12 bg-white/5">
-          <form className="space-y-6">
-            <div>
-              <label className="block text-blue-400 font-medium mb-2">Full Name</label>
-              <input
-                type="text"
-                placeholder="Nget Meas"
-                className="w-full px-4 py-3 bg-gray-800/50 text-white rounded-xl border border-white/10 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="block text-blue-400 font-medium mb-2">Email</label>
-              <input
-                type="email"
-                placeholder="example@gmail.com"
-                className="w-full px-4 py-3 bg-gray-800/50 text-white rounded-xl border border-white/10 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="block text-blue-400 font-medium mb-2">Message</label>
-              <textarea
-                rows="5"
-                placeholder="How can I help you?"
-                className="w-full px-4 py-3 bg-gray-800/50 text-white rounded-xl border border-white/10 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none resize-none transition-all"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 transition-all active:scale-95"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-
-      </div>
     </div>
+
+    {/* Right Form */}
+    <div className="p-8">
+      <form className="space-y-5">
+
+        {/* Full Name */}
+        <div>
+          <label className="block text-white font-medium">Full Name</label>
+          <input
+            type="text"
+            placeholder="Your name"
+            className="w-full px-4 py-3 text-white rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+        </div>
+
+
+        {/* Email */}
+        <div>
+          <label className="block text-white font-medium">Email</label>
+          <input
+            type="email"
+            placeholder="Youremail@gmail.com"
+            className="w-full px-4 py-3 text-white rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+        </div>
+
+      
+        {/* About Me */}
+        <div>
+          <label className="block text-white font-medium">About Me</label>
+          <textarea
+            rows="4"
+            placeholder="Write a short summary about yourself..."
+            className="w-full px-4 py-3 text-white rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+          ></textarea>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-sky-600 hover:bg-sky-800 text-white hover:text-gray-400 py-3 rounded-xl font-medium transition"
+        >
+          Save CV
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</div>
   )
 }
 
 export default Contact
+
+

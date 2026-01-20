@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { About } from './About'
-import Sli from '../Main/Sli'
+
 import Skills from './Skills'
 import Contact from './Contact'
 import Project from './Project'
+import Sli from '../Main/Sli'
 
 const Home = () => {
   return (
